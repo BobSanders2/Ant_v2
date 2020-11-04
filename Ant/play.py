@@ -8,28 +8,36 @@ QUIT = "quit"
 COMMANDS = [PLAY, HELP, QUIT]
 
 def play():
+    title = False
     while True:
-        print("""
-        ===================================================
-        ===================================================
-        ===================================================
-    
-                    Welcome to the Ant Game!
-    
-        ===================================================
-        ===================================================
-        ===================================================
-    
-        """)
-        sleep(1)
-        print(interface.generate_readable_list(COMMANDS))
+        if not title:
+            title = True
+            print("""
+            ===================================================
+            ===================================================
+            ===================================================
+        
+                        Welcome to the Ant Game!
+        
+            ===================================================
+            ===================================================
+            ===================================================
+        
+            """)
+            sleep(1)
+            print(f"Please choose either: {interface.generate_readable_list(COMMANDS)}")
+
+
+        else:
+            pass
+
         command = interface.get_command(COMMANDS)
 
         if command == PLAY:
             start_game()
 
         elif command == HELP:
-            print(interface.generate_readable_list(COMMANDS))
+            print(f"Available Commands:\n{interface.generate_readable_list(COMMANDS)}")
 
         elif command == QUIT:
             break

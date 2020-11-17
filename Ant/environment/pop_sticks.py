@@ -20,8 +20,11 @@ def pop_sticks(matrix, obj_coords):
             matrix[x][y] = "s"
             matrix[x + 1][y] = "s"
             temp = random.choice([0, 1])
-            if temp != 0:
-                matrix[x + 2][y] = "s"
+            try:
+                if temp != 0:
+                    matrix[x + 2][y] = "s"
+            except IndexError:
+                pass
         else:
             pass
     return pop_nectar(matrix, obj_coords)

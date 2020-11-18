@@ -1,4 +1,4 @@
-from ..interface import get_game_command
+from Ant.interface import get_game_command
 from time import sleep
 import random
 

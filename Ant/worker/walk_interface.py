@@ -1,12 +1,11 @@
-from .. import interface
-from .environment_interface import environment_interface
+from Ant.interface.environment_interface import environment_interface
 
 
 def walk_interface(worker, environment):
     x, y = worker.current_location
 
     try:
-        if worker.endurance == 0:
+        if getattr(worker.char_stats, endurance) == 0:
             print("Ant is tired and must rest!!")
             return None
         elif worker.facing == "north":
@@ -26,6 +25,6 @@ def walk_interface(worker, environment):
             environment_interface(worker=worker, environment=environment, x=x, y=y + 1)
             worker.current_location[1] -= 1
 
-        worker.endurance -= 10
+        setattr(worker.char_stats, endurance, getattr(worker.char_stats, endurance) - 10)
     except IndexError:
         print("Ant can't go that way!")

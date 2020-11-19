@@ -5,7 +5,10 @@ import random
 
 def environment_interface(worker, environment, x, y):
 
-    try:
+    if x > 25 or x < 0 or y > 25 or y < 0:
+        raise IndexError
+
+    else:
         env_object = environment[x][y]
         if env_object == "l":
             additional_commands = ["walk over", "turn left", "turn right", "location", "status"]
@@ -56,10 +59,17 @@ def environment_interface(worker, environment, x, y):
         if env_object == "s":
             additional_commands = ["walk over", "turn left", "turn right", "location", "status"]
             print("Ant has found a stick. What will you do?")
-            command = get_game_command.get_game_command(worker=worker, environment=environment, additional_commands=additional_commands)
+            command = get_game_command.get_game_command(worker=worker, environment=environment,
+                                                        additional_commands=additional_commands, default=False)
 
             if command == "walk over":
                 print("Ant has walked on top of the leaf.")
 
-    except IndexError:
-        raise IndexError
+        if env_object == "e":
+            additional_commands = ["walk away", ]
+            print("You have encountered an enemy!")
+            sleep(1)
+            print("What will you do?")
+            print("At the moment, nothing!")
+
+

@@ -1,30 +1,44 @@
 from Ant.interface.environment_interface import environment_interface
 
 
-def walk_interface(worker, environment):
+def walk_process(worker, environment):
     x, y = worker.current_location
 
-    try:
-        if getattr(worker.char_stats, endurance) == 0:
-            print("Ant is tired and must rest!!")
-            return None
-        elif worker.facing == "north":
-            print("Ant moved forward.")
+    if worker.facing == "north":
+        try:
             environment_interface(worker=worker, environment=environment, x=x - 1, y=y)
             worker.current_location[0] -= 1
-        elif worker.facing == "south":
-            print("Ant moved forward.")
+        except IndexError:
+            return False
+    elif worker.facing == "south":
+        try:
             environment_interface(worker=worker, environment=environment, x=x + 1, y=y)
             worker.current_location[0] += 1
-        elif worker.facing == "west":
-            print("Ant moved forward.")
+        except IndexError:
+            return False
+    elif worker.facing == "west":
+        try:
             environment_interface(worker=worker, environment=environment, x=x, y=y - 1)
             worker.current_location[1] -= 1
-        elif worker.facing == "east":
-            print("Ant moved forward.")
+        except IndexError:
+            return False
+    elif worker.facing == "east":
+        try:
             environment_interface(worker=worker, environment=environment, x=x, y=y + 1)
-            worker.current_location[1] -= 1
+            worker.current_location[1] += 1
+        except IndexError:
+            return False
 
-        setattr(worker.char_stats, endurance, getattr(worker.char_stats, endurance) - 10)
-    except IndexError:
-        print("Ant can't go that way!")
+
+def walk_interface(worker, environment):
+    walk = walk_process(worker, environment)
+
+    if getattr(worker.char_stats, 'endurance') == 0:
+        print("Ant is tired and must rest!!")
+        return None
+    else:
+        if walk is False:
+            print("Ant can't go that way")
+        else:
+            setattr(worker.char_stats, 'endurance', getattr(worker.char_stats, 'endurance') - 10)
+            print("Ant has moved forward.")

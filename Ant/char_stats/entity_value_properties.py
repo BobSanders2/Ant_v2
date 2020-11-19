@@ -1,7 +1,7 @@
 def generate_value_property(name):
     @property
     def value_property(entity):
-        return getattr(entity, name)
+        return getattr(entity, "_" + name)
 
     @value_property.setter
     def value_property(entity, value):
@@ -13,7 +13,7 @@ def generate_value_property(name):
         if value < 0:
             value = 0
 
-        setattr(entity, name, value)
+        setattr(entity, "_" + name, value)
 
     return value_property
 
@@ -21,11 +21,11 @@ def generate_value_property(name):
 def generate_maximum_value_stat_property(name):
     @property
     def maximum_value_stat_property(entity):
-        return getattr(entity, "maximum_"+ name)
+        return getattr(entity, "_maximum_" + name)
 
     @maximum_value_stat_property.setter
     def maximum_value_stat_property(entity, value):
-        setattr(entity, "maximum_" + name, value)
+        setattr(entity, "_maximum_" + name, value)
 
         if not hasattr(entity, name) or value < getattr(entity, name):
             setattr(entity, name, value)

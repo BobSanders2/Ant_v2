@@ -1,3 +1,5 @@
+from .. import enemies
+from ..combat import Combat
 from Ant.interface import get_game_command
 from time import sleep
 import random
@@ -11,17 +13,17 @@ def environment_interface(worker, environment, x, y):
     else:
         env_object = environment[x][y]
         if env_object == "l":
-            additional_commands = ["walk over", "turn left", "turn right", "location", "status"]
+            additional_commands = ["walk over"]
             print("Ant has found a leaf. What will you do?")
-            command = get_game_command.get_game_command(worker=worker, environment=environment, additional_commands=additional_commands, default=False)
+            command = get_game_command.get_game_command(worker=worker, environment=environment, additional_commands=additional_commands)
 
             if command == "walk over":
                 print("Ant has walked on top of the leaf.")
 
         if env_object == "n":
-            additional_commands = ["eat", "turn left", "turn right", "location", "status"]
+            additional_commands = ["eat"]
             print("Ant has found some nectar! What will you do?")
-            command = get_game_command.get_game_command(worker=worker, environment=environment, additional_commands=additional_commands, default=False)
+            command = get_game_command.get_game_command(worker=worker, environment=environment, additional_commands=additional_commands)
 
             if command == "eat":
                 print("Ant has eaten the nectar.")
@@ -33,9 +35,9 @@ def environment_interface(worker, environment, x, y):
                 print()
 
         if env_object == "p":
-            additional_commands = ["eat", "turn left", "turn right", "location", "status"]
+            additional_commands = ["eat"]
             print("Ant has found some nectar! What will you do?")
-            command = get_game_command.get_game_command(worker=worker, environment=environment, additional_commands=additional_commands, default=False)
+            command = get_game_command.get_game_command(worker=worker, environment=environment, additional_commands=additional_commands)
 
             if command == "eat":
                 print("Ant has eaten the nectar.")
@@ -57,19 +59,33 @@ def environment_interface(worker, environment, x, y):
                 environment[x][y] = "x"
 
         if env_object == "s":
-            additional_commands = ["walk over", "turn left", "turn right", "location", "status"]
+            additional_commands = ["walk over"]
             print("Ant has found a stick. What will you do?")
             command = get_game_command.get_game_command(worker=worker, environment=environment,
-                                                        additional_commands=additional_commands, default=False)
+                                                        additional_commands=additional_commands)
 
             if command == "walk over":
                 print("Ant has walked on top of the leaf.")
 
         if env_object == "e":
-            additional_commands = ["walk away", ]
+            additional_commands = ["walk away", "attack"]
             print("You have encountered an enemy!")
-            sleep(1)
-            print("What will you do?")
-            print("At the moment, nothing!")
+            first_attacker = random.choice(["worker", "enemy"])
 
-
+            if first_attacker == "worker":
+                sleep(1)
+                print("What will you do?")
+                command = get_game_command.get_game_command(worker=worker, environment=environment, additional_commands=additional_commands)
+                if command == "run away":
+                    worker.run_away()
+                elif command == "attack":
+                    combat = Combat(worker, enemies.enemy(), environment)
+                    combat.start_combat(first_attacker)
+            else:
+                sleep(1)
+                print("The other ant has noticed you!")
+                sleep(1)
+                print("It rushes towards you with murderous intent!")
+                sleep(1)
+                combat = Combat(worker, enemies.enemy(), environment)
+                combat.start_combat(first_attacker)

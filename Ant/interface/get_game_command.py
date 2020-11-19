@@ -26,7 +26,7 @@ def get_game_command(worker, environment, additional_commands=[], default=True):
             return command
 
         if command == "walk":
-            worker.walk_interface(environment)
+            worker.walk(environment)
 
         if command == "turn left":
             worker.turn_interface("left")

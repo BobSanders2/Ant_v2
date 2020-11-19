@@ -6,8 +6,8 @@ class Worker:
         self.facing = "north"
         self.char_stats = char_stats
 
-
-    walk_interface = walk_interface.walk_interface
+    run_away = walk_interface.run_away
+    walk = walk_interface.walk_interface
     turn_interface = turn_interface.turn_interface
     location = get_location.get_location
     status = get_status.get_status

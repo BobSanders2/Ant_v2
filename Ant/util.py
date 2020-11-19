@@ -17,3 +17,6 @@ def delay_print(text, time=0.05):
 
 class GameOver(Exception):
     pass
+
+class AntHasDied(Exception):
+    pass

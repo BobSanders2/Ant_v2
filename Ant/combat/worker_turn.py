@@ -1,9 +1,9 @@
 from .. import interface
 
-BITE = "bite"
+ATTACK = "attack"
 RUN_AWAY = "run_away"
 REST = "rest"
-COMMANDS = [BITE, REST, RUN_AWAY]
+COMMANDS = [ATTACK, REST, RUN_AWAY]
 
 
 def worker_turn(combat):
@@ -17,5 +17,5 @@ def worker_turn(combat):
         if command == RUN_AWAY:
             combat.worker.run_away()
 
-        if command == BITE:
-            combat.
+        if command == ATTACK:
+            combat.worker_attacks()

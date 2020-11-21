@@ -8,6 +8,7 @@ class Combat:
         self.run_away = False
         self.environment = environment
 
+
     start_combat = start_combat.start_combat
     worker_attacks = worker_attack_phase.worker_attack_phase
 

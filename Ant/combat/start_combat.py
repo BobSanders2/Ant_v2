@@ -4,18 +4,30 @@ from time import sleep
 
 
 def start_combat(combat, first_attacker):
+    print("""
+    
+=============================
+    
+      BEGIN BUG BATTLE
+    
+==============================
+   
+    """)
+    sleep(1)
+    print(f"{first_attacker} attacks first!")
+
     while True:
-        if first_attacker == "worker":
-            worker_turn.worker_turn()
-            enemy_turn.enemy_turn()
+        if first_attacker == "Ant":
+            combat.worker_turn()
+            combat.enemy_turn()
         else:
-            enemy_turn.enemy_turn()
-            worker_turn.worker_turn()
+            combat.enemy_turn()
+            combat.worker_turn()
 
         if combat.run_away:
             break
 
-        if combat.worker.char_stats.health == 0:
+        if combat.worker.health == 0:
             raise util.AntHasDied
 
         if combat.enemy.health == 0:

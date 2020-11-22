@@ -2,6 +2,10 @@ import random
 from time import sleep
 from sys import stdout
 
+def set_attributes(object, **attributes):
+    for k, v in attributes.items():
+        setattr(object, k, v)
+
 def move(location):
     move_location = location.copy()
 
@@ -19,4 +23,7 @@ class GameOver(Exception):
     pass
 
 class AntHasDied(Exception):
+    pass
+
+class NotEnoughEndurance(Exception):
     pass

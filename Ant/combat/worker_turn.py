@@ -8,8 +8,8 @@ COMMANDS = [ATTACK, REST, RUN_AWAY]
 
 def worker_turn(combat):
     while True:
-        interface.generate_readable_list(COMMANDS)
-        command = interface.get_command(COMMANDS)
+        print(f"What will you do?: {interface.generate_readable_list(COMMANDS)}")
+        command = interface.get_game_command(combat.worker, combat.environment, additional_commands=COMMANDS, default=False)
 
         if command == REST:
             combat.worker.rest()

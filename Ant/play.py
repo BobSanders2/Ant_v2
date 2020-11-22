@@ -8,6 +8,10 @@ HELP = "help"
 QUIT = "quit"
 COMMANDS = [PLAY, HELP, QUIT]
 
+YES = "yes"
+NO = "no"
+CONTINUE_COMMANDS = [YES, NO]
+
 def play():
     title = False
     while True:
@@ -54,6 +58,15 @@ def play():
             # sleep(2)
             # print("")
             start_game()
+            title = False
+            print(f"Continue? {interface.generate_readable_list(CONTINUE_COMMANDS)}")
+            command = interface.get_command(CONTINUE_COMMANDS)
+
+            if command == YES:
+                pass
+            if command == NO:
+                break
+
         elif command == HELP:
             print(f"Available Commands:\n{interface.generate_readable_list(COMMANDS)}")
 

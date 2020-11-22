@@ -1,16 +1,17 @@
 from time import sleep
 import random
-from ..char_stats import attacking
 from ..util import NotEnoughEndurance
 
 
 def enemy_attack_phase(combat):
+    print(" ")
     print("The enemy will now attack!")
-    sleep(1)
+    sleep(3)
+    print(" ")
 
     attack = random.choice(combat.enemy.attacks)
 
     try:
-        attacking.attacking(combat.enemy, combat.worker, attack)
+        combat.attack(combat.enemy, combat.worker.char_stats, attack)
     except NotEnoughEndurance:
         pass

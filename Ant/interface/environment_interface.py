@@ -68,7 +68,7 @@ def environment_interface(worker, environment, x, y):
                 print("Ant has walked on top of the leaf.")
 
         if env_object == "e":
-            commands = ["walk away", "attack"]
+            commands = ["run away", "attack"]
             print("You have encountered an enemy!")
             first_attacker = random.choice(["Ant", "Enemy"])
 

@@ -15,5 +15,5 @@ def start_game():
         print(f"Please choose either: {interface.generate_readable_list(COMMANDS)}")
         get_game_command(worker, environment)
     except (AntHasDied, GameOver) as exception:
-        if isinstance(exception):
+        if isinstance(exception, AntHasDied):
             interface.print_multiple_lines(lines=["=" * 20, "", "", "", "Ant has died", "", "", "", "=" * 20], delay=1)
